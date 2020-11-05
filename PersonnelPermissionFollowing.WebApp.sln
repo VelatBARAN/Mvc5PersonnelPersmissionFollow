@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonnelPermissionFollowing.WebApp", "PersonnelPermissionFollowing.WebApp\PersonnelPermissionFollowing.WebApp.csproj", "{A0C9A7B3-7EE5-4B2D-942B-E6B4EDE706FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonnelPermissionFollowing.Entities", "vPersonnelPermissionFollowing.Entities\PersonnelPermissionFollowing.Entities.csproj", "{C34A7BE1-490A-45C6-9AD5-14252E83021E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonnelPermissionFollowing.DataAccessLayer", "PersonnelPermissionFollowing.DataAccessLayer\PersonnelPermissionFollowing.DataAccessLayer.csproj", "{84A25E27-8546-436B-8211-EA17CA4A8A83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonnelPermissionFollowing.BusinessLayer", "PersonnelPermissionFollowing.BusinessLayer\PersonnelPermissionFollowing.BusinessLayer.csproj", "{A172E367-8A03-4698-B8BC-675F6ACB22A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonnelPermissionFollowing.Core", "PersonnelPermissionFollowing.Core\PersonnelPermissionFollowing.Core.csproj", "{B422318A-ECB9-439D-A357-16A371B792D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonnelPermissionFollowing.Common", "PersonnelPermissionFollowing.Common\PersonnelPermissionFollowing.Common.csproj", "{8BF61ED3-4FD6-41D6-B348-4FC75C7214F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0C9A7B3-7EE5-4B2D-942B-E6B4EDE706FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C9A7B3-7EE5-4B2D-942B-E6B4EDE706FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C9A7B3-7EE5-4B2D-942B-E6B4EDE706FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C9A7B3-7EE5-4B2D-942B-E6B4EDE706FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C34A7BE1-490A-45C6-9AD5-14252E83021E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C34A7BE1-490A-45C6-9AD5-14252E83021E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C34A7BE1-490A-45C6-9AD5-14252E83021E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C34A7BE1-490A-45C6-9AD5-14252E83021E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84A25E27-8546-436B-8211-EA17CA4A8A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A25E27-8546-436B-8211-EA17CA4A8A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A25E27-8546-436B-8211-EA17CA4A8A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A25E27-8546-436B-8211-EA17CA4A8A83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A172E367-8A03-4698-B8BC-675F6ACB22A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A172E367-8A03-4698-B8BC-675F6ACB22A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A172E367-8A03-4698-B8BC-675F6ACB22A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A172E367-8A03-4698-B8BC-675F6ACB22A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B422318A-ECB9-439D-A357-16A371B792D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B422318A-ECB9-439D-A357-16A371B792D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B422318A-ECB9-439D-A357-16A371B792D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B422318A-ECB9-439D-A357-16A371B792D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BF61ED3-4FD6-41D6-B348-4FC75C7214F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BF61ED3-4FD6-41D6-B348-4FC75C7214F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BF61ED3-4FD6-41D6-B348-4FC75C7214F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF61ED3-4FD6-41D6-B348-4FC75C7214F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1DD2C4E1-C823-455F-9297-CECBCFF78AE9}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,369 @@
+﻿@using PersonnelPermissionFollowing.WebApp.Models
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>BAĞLAR BELEDİYESİ | PERSONEL İZİN TAKİP SİSTEMİ</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Images/baglar-logo.jpg">
+    <!-- Google Fonts
+        ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/WebPages/css/bootstrap.min.css">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <!-- datatables css-->
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- custom css -->
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <!-- meanmenu CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/WebPages/css/meanmenu/meanmenu.min.css">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/WebPages/css/animate.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/WebPages/css/normalize.css">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/WebPages/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- jvectormap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/WebPages/css/jvectormap/jquery-jvectormap-2.0.3.css">
+    <!-- notika icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/WebPages/css/notika-custom-icon.css">
+    <!-- wave CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/WebPages/css/wave/waves.min.css">
+    <!-- main CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/WebPages/css/main.css">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/WebPages/style.css">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/WebPages/css/responsive.css">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    @* validation-summary-errors css *@
+    <link href="~/Content/validation-summary-errors.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <!-- Start Header Top Area -->
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="logo-area" style="margin-left:10px">
+                        <a href="/Home/Index" title="WBSOFTWARE - PERSONEL İZİN TAKİP SİSTEMİ">
+                            <img src="~/Images/baglar-logo.jpg" width="40" height="40" class="img-circle" alt="" />
+                            <strong>BAĞLAR BELEDİYESİ</strong><br />
+                                PERSONEL İZİN TAKİP SİSTEMİ
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <div class="header-top-menu">
+                        <ul class="nav navbar-nav notika-top-nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-center" href="javascript:void(0)">
+                                    <b>@*Version : @(System.Reflection.Assembly.GetAssembly(typeof(MvcApplication))?.GetName().Version.ToString())*@</b>
+                                    <b>Version : @(typeof(Controller).Assembly.GetName().Version)</b>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle" title="Profilim">
+                                    <span>
+                                        <img src="~/Images/@CurrentSession.User.Personnels.ProfileImage" width="40" height="40" class="img-circle" alt="" />
+                                        @CurrentSession.User.Username
+                                    </span>
+                                </a>
+                                <div role="menu" class="dropdown-menu message-dd chat-dd animated zoomIn">
+                                    <div class="hd-mg-tt text-center">
+                                        <strong style="font-size:20px"><span class="glyphicon glyphicon-tasks"></span> @CurrentSession.User.Authority.Name</strong>
+                                    </div>
+                                    <div class="hd-message-info">
+                                        <a href="/User/ShowUserProfile" title="Profilim">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-mg-ctn">
+                                                    <span class="glyphicon glyphicon-user"></span> Profilim
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="/User/EditUserProfile" title="Profil Güncelle">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-mg-ctn">
+                                                    <span class="glyphicon glyphicon-edit"></span> Profil Güncelle
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="/User/UserChangePassword" title="Şifre Değiştir">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-mg-ctn">
+                                                    <span class="glyphicon glyphicon-lock"></span> Şifre Değiştir
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="/Home/LogOut" title="Çıkış">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-mg-ctn">
+                                                    <span class="glyphicon glyphicon-log-out"></span> Çıkış
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Menu area start-->
+    <div class="main-menu-area mg-tb-30 m-1">
+        <div class="container">
+            <di? class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+                        <li class="active">
+                            <a data-toggle="tab" href="#Anasayfa"><i class="notika-icon notika-house"></i> Anasayfa</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#Personeller"><i class="fa fa-users"></i> Personeller</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#PersonelGörevAta"><i class="fa fa-stack-overflow"></i> Personel Görev Atama</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#Mıntıkalar"><i class="fa fa-map-marker"></i> Mıntıkalar</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#İzinTip"><i class="fa fa-stack-exchange"></i> İzin Tipleri</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#PopUplar"><i class="fa fa-modx"></i> PopUplar</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#Kullanıcılar"><i class="fa fa-user-md"></i> Kullanıcılar</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content custom-menu-content">
+                        <div id="Anasayfa" class="tab-pane in active notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li>
+                                    <a href="/Home/Index">Anasayfa</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Personeller" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li>
+                                    <a href="/Personnel/Index">Tüm Personeller</a>
+                                </li>
+                                <li>
+                                    <a href="/Personnel/Create">Personel Ekle</a>
+                                </li>
+                                <li>
+                                    <a href="/Personnel/PersonnelPermissionList">İzin Alan Personeller</a>
+                                </li>
+                                <li>
+                                    <a href="/PersonnelDegree/Index">Eğitim Durumları</a>
+                                </li>
+                                <li>
+                                    <a href="/PersonnelPosition/Index">Unvanlar</a>
+                                </li>
+                                <li>
+                                    <a href="/PersonnelTask/Index">Görevler</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="PersonelGörevAta" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li>
+                                    <a href="/AssigningTaskOfPersonnel/Index">Tüm Atanan Törevler</a>
+                                </li>
+                                <li>
+                                    <a href="/AssigningTaskOfPersonnel/Create">Yeni Görev Atama</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Mıntıkalar" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li>
+                                    <a href="/Zone/Index">Tüm Mıntıkalar</a>
+                                </li>
+                                <li>
+                                    <a href="/Zone/Create">Mıntıka Ekle</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="İzinTip" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li>
+                                    <a href="/PersonnelPermissionTip/Index">İzin Tipleri</a>
+                                </li>
+                                <li>
+                                    <a href="/PersonnelPermissionTip/Create">İzin Tipi Ekle</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="PopUplar" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li>
+                                    <a href="/PopUp/Index">PopUplar</a>
+                                </li>
+                                <li>
+                                    <a href="/PopUp/Create">PopUp Ekle</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Kullanıcılar" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li>
+                                    <a href="/User/Index">Kullanıcılar</a>
+                                </li>
+                                <li>
+                                    <a href="/User/Index">Kullanıcı Ekle</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Main Menu area End-->
+    <div class="container" style="margin-top:30px">
+        @RenderBody()
+    </div>
+    <!-- Start Footer area-->
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="footer-copy-right">
+                        <p>
+                            Copyright @DateTime.Now.Year
+                            Tüm Hakları Saklıdır. <a href="http://www.welatbaran.somee.com.tr" target="_blank">WBSOFTWARE | PERSONEL IZIN TAKIP SISTEMI</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer area-->
+    <!-- jquery
+        ============================================ -->
+    <script src="~/Content/WebPages/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- Datatables JS
+       ============================================ -->
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js" type="text/javascript"></script>
+
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/bootbox.min.js"></script>
+
+    <!-- wow JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/wow.min.js"></script>
+    <!-- price-slider JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/jquery-price-slider.js"></script>
+    <!-- owl.carousel JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/owl.carousel.min.js"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/jquery.scrollUp.min.js"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/meanmenu/jquery.meanmenu.js"></script>
+    <!-- counterup JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/counterup/jquery.counterup.min.js"></script>
+    <script src="~/Content/WebPages/js/counterup/waypoints.min.js"></script>
+    <script src="~/Content/WebPages/js/counterup/counterup-active.js"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- jvectormap JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="~/Content/WebPages/js/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/Content/WebPages/js/jvectormap/jvectormap-active.js"></script>
+    <!-- sparkline JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/Content/WebPages/js/sparkline/sparkline-active.js"></script>
+    <!-- sparkline JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/flot/jquery.flot.js"></script>
+    <script src="~/Content/WebPages/js/flot/jquery.flot.resize.js"></script>
+    <script src="~/Content/WebPages/js/flot/curvedLines.js"></script>
+    <script src="~/Content/WebPages/js/flot/flot-active.js"></script>
+    <!-- knob JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/knob/jquery.knob.js"></script>
+    <script src="~/Content/WebPages/js/knob/jquery.appear.js"></script>
+    <script src="~/Content/WebPages/js/knob/knob-active.js"></script>
+    <!--  wave JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/wave/waves.min.js"></script>
+    <script src="~/Content/WebPages/js/wave/wave-active.js"></script>
+    <!--  todo JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/todo/jquery.todo.js"></script>
+    <!-- plugins JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/plugins.js"></script>
+    <!--  Chat JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/chat/moment.min.js"></script>
+    <script src="~/Content/WebPages/js/chat/jquery.chat.js"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/main.js"></script>
+    <!-- tawk chat JS
+        ============================================ -->
+    <script src="~/Content/WebPages/js/tawk-chat.js"></script>
+
+    <!-- Validation js-->
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <!-- custom js-->
+    <script src="~/Scripts/custom-personnelDelete.js"></script>
+</body>
+</html>

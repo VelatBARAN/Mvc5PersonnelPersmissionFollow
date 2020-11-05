@@ -1,0 +1,56 @@
+alter trigger trgToTalWorkingYearInsert
+on
+Personnels
+after insert
+as
+declare @personnelId int
+declare @totalWorkingYear int
+declare @totalWorkingYearFark int
+declare @totalAllowDay int
+set @totalAllowDay = 0;
+
+select @personnelId=Id, @totalWorkingYear = DATEDIFF(YEAR,StartToJobDateTime,GETDATE()) from inserted
+
+if(@totalWorkingYear > 5)
+begin
+  set @totalWorkingYearFark = @totalWorkingYear - 5;
+  set @totalAllowDay = @totalAllowDay + (5*16 + @totalWorkingYearFark*22);
+  end
+else if(@totalWorkingYear > 0 and @totalWorkingYear < 5)
+begin
+  set @totalAllowDay = @totalAllowDay + (@totalWorkingYear*16);
+  end
+
+update Personnels set TotalWorkingYear = @totalWorkingYear, TotalAllowDay = @totalAllowDay where Id = @personnelId
+
+-----------------------------------------------------------
+
+alter trigger trgToTalWorkingYearUpdate
+on
+Personnels
+after update
+as
+
+declare @oldStartToJobDateTime datetime
+declare @newStartToJobDateTime datetime
+declare @personnelId int
+declare @totalWorkingYear int
+declare @totalWorkingYearFark int
+declare @totalAllowDay int
+set @totalAllowDay = 0;
+
+select @personnelId=Id, @oldStartToJobDateTime = StartToJobDateTime from deleted
+select @personnelId=Id, @newStartToJobDateTime = StartToJobDateTime from inserted
+set @totalWorkingYear = DATEDIFF(YEAR,@newStartToJobDateTime,GETDATE());
+
+if(@totalWorkingYear > 5)
+ begin
+  set @totalWorkingYearFark = @totalWorkingYear - 5;
+  set @totalAllowDay = @totalAllowDay + (5 * 16 + @totalWorkingYearFark * 22);
+ end
+else if(@totalWorkingYear > 0 and @totalWorkingYear <= 5)
+ begin
+  set @totalAllowDay = @totalAllowDay + @totalWorkingYear * 16;
+ end
+
+update Personnels set TotalWorkingYear = @totalWorkingYear , TotalAllowDay = @totalAllowDay where Id = @personnelId

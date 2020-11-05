@@ -1,0 +1,62 @@
+﻿@using PersonnelPermissionFollowing.Entities
+@model AssigningTaskOfPersonnel
+
+@{
+    ViewBag.Title = "Personel Görev Atama";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h4>@ViewBag.Title</h4>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-offset-2">
+        @using (Html.BeginForm("Create", "AssigningTaskOfPersonnel", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group row">
+                <div class="col-md-12">
+                    @Html.ValidationSummary(false)
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.ZonesId, "Mıntıka", htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-2" })
+                @Html.DropDownListFor(m => m.ZonesId, (SelectList)ViewBag.ZoneList, "Lütfen mıntıka seçiniz", new { @class = "dropdown form-control" })
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.PersonnelsId, "Personel", htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-2" })
+                @Html.DropDownListFor(m => m.PersonnelsId, (List<SelectListItem>)ViewBag.PersonnelList, "Lütfen personel seçiniz", new { @class = "dropdown form-control" })
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.TaskDescription, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-2" })
+                @Html.TextAreaFor(model => model.TaskDescription, new { htmlAttributes = new { @class = "form-control col-md-10", rows = "3", cols = "10" } })
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.WeekdaysId, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-2" })
+                @Html.DropDownListFor(m => m.WeekdaysId, (SelectList)ViewBag.TaskVacationList, "Lütfen hafta tatilini seçiniz", new { @class = "dropdown form-control" })
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-2" })
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-10 col-md-offset-1 text-right">
+                    <button type="submit" class="btn btn-success" title="Ekle"> <span class="glyphicon glyphicon-ok mr-2"></span> Ekle</button>
+                    <a href="/AssigningTaskOfPersonnel/Index" class="btn btn-default" title="Geri Dön"><span class="glyphicon glyphicon-arrow-left mr-2"></span> Geri Dön</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

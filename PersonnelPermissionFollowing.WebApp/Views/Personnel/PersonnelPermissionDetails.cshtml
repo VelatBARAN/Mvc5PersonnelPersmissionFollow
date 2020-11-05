@@ -1,0 +1,142 @@
+﻿@using PersonnelPermissionFollowing.Entities
+@model PersonnelPermissionRequest
+
+@{
+    ViewBag.Title = "Personel İzin Detayı";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h3>@ViewBag.Title</h3>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <dl class="dl-horizontal">
+            @*<dt>
+                    @Html.DisplayNameFor(model => model.ProfilImage)
+                </dt>*@
+
+            <div class="col-md-4">
+                <img src="~/images/@Model.Personnels.ProfileImage" alt="" width="250" height="250" class="img-responsive img-rounded" />
+            </div>
+
+            <div class="col-md-8" style="font-size:18px">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Personnels.Tc)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Personnels.Tc)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Personnels.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Personnels.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Personnels.Surname)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Personnels.Surname)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PersonnelPermissionTips.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PersonnelPermissionTips.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.NumberofDays)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NumberofDays)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PermissionStartDatetime)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PermissionStartDatetime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PermissionEndDatetime)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PermissionEndDatetime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PermissionStates.Name)
+                </dt>
+                <dd>
+                    @{
+                        if (Model.PermissionStatesId == 1)
+                        {
+                            <i class="fa fa-edit text-warning"> @Model.PermissionStates.Name</i>
+                        }
+                        else if (Model.PermissionStatesId == 2)
+                        {
+                            <i class="fa fa-check text-success"> @Model.PermissionStates.Name</i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-trash text-danger"> @Model.PermissionStates.Name</i>
+                        }
+                    }
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Users.Username)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Users.Username)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ModifiedUsername)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ModifiedUsername)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreatedOnDatetime)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CreatedOnDatetime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ModifiedOnDatetime)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ModifiedOnDatetime)
+                </dd>
+            </div>
+
+        </dl>
+    </div>
+</div>
+
+<div class="col-md-12 text-right">
+    @{
+        if (Model.PermissionStatesId == 1)
+        {
+            <a href="/Personnel/PersonnelPermissionEdit/@Model.Id" class="btn btn-warning" title="Güncelle" ><span class="glyphicon glyphicon-edit mr-2"></span> Güncelle</a>
+        }
+    }
+    <a href="/Personnel/PersonnelPermissionList" class="btn btn-default" title="Geri Dön"><span class="glyphicon glyphicon-arrow-left mr-2"></span> Geri Dön</a>
+</div>
+

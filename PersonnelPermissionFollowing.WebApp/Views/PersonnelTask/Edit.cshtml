@@ -1,0 +1,40 @@
+﻿@model PersonnelPermissionFollowing.Entities.PersonnelTasks
+
+@{
+    ViewBag.Title = "Görev Güncelle";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h4>@ViewBag.Title</h4>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-offset-2">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group row">
+                <div class="col-md-12">
+                    @Html.ValidationSummary(false)
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-2" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-10 col-md-offset-1 text-right">
+                    <button type="submit" class="btn btn-warning" title="Güncelle"> <span class="glyphicon glyphicon-edit mr-2"></span> Güncelle</button>
+                    <a href="/PersonnelTask/Index" class="btn btn-default" title="Geri Dön"><span class="glyphicon glyphicon-arrow-left mr-2"></span> Geri Dön</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

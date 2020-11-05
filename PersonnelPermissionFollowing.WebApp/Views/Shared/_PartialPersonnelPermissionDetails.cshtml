@@ -1,0 +1,52 @@
+﻿@using PersonnelPermissionFollowing.Entities
+@model List<Personnels>
+
+    <div class="media">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <img src="~/Images/@item.ProfileImage" class="rounded-circle" height="140" width="140" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="media-body">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text col-form-label">TC</label>
+                            </div>
+                            <input type="text" aria-label="First name" value="@item.Tc" readonly class="form-control">
+                        </div><br />
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text col-form-label">Adı</label>
+                            </div>
+                            <input type="text" aria-label="First name" value="@item.Name" readonly class="form-control">
+                        </div><br />
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text col-form-label">Soyadı</label>
+                            </div>
+                            <input type="text" aria-label="First name" value="@item.Surname" readonly class="form-control">
+                        </div><br />
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text col-form-label">Toplam Kullanılan İzin</label>
+                            </div>
+                            <input type="text" aria-label="First name" value="@item.TotalUsingAllowDay" readonly class="form-control">
+                        </div><br />
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text col-form-label">Toplam Kalan İzin</label>
+                            </div>
+                            <input type="text" aria-label="First name" value="@item.TotalRemainAllowDay" readonly class="form-control">
+                        </div><br />
+                    </div>
+                    <div class="text-center">
+                        <a href="" class="btn btn-danger text-right" title="Kapat" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-floppy-remove"> Kapat</span>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

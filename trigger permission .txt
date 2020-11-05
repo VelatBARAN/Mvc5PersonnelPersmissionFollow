@@ -1,0 +1,75 @@
+alter trigger trgInsertPersonnelPermission
+on PersonnelPermissionRequest
+after insert
+as
+begin
+
+declare @personnelId int
+declare @requiestday int
+declare @usingday int
+declare @totalday int
+declare @remainday int
+
+
+select @personnelId = PersonnelsId , @requiestday = NumberOfDays from inserted
+
+select @totalday=TotalAllowDay,@usingday=TotalUsingAllowDay from Personnels where Id = @personnelId
+
+set @usingday = @usingday + @requiestday
+set @remainday = @totalday - @usingday
+
+update Personnels set TotalRemainAllowDay = @remainday, TotalUsingAllowDay = @usingday where Id = @personnelId
+
+end;
+
+-------------------------------------------------------------
+
+alter trigger trgUpdatePersonnelPermission
+on PersonnelPermissionRequest
+after update
+as
+begin
+
+declare @personnelId int
+declare @oldrequiestday int
+declare @newrequiestday int
+declare @totalday int
+declare @usingday int
+declare @remainday int
+
+select @personnelId = PersonnelsId , @oldrequiestday = NumberOfDays from deleted
+select @personnelId = PersonnelsId , @newrequiestday = NumberOfDays from inserted
+
+select @totalday=TotalAllowDay,@usingday=TotalUsingAllowDay from Personnels where Id = @personnelId
+
+set @usingday = @usingday - @oldrequiestday
+set @usingday = @usingday + @newrequiestday
+set @remainday = @totalday - @usingday
+
+update Personnels set TotalRemainAllowDay = @remainday, TotalUsingAllowDay = @usingday where Id = @personnelId
+
+end;
+
+---------------------------------------------------------------------------
+
+alter trigger trgDeletePersonnelPermission
+on PersonnelPermissionRequest
+after delete
+as
+begin
+
+declare @personnelId int
+declare @requiestday int
+declare @totalday int
+declare @usingday int
+declare @remainday int
+
+select @personnelId = PersonnelsId , @requiestday = NumberOfDays from deleted
+select @totalday=TotalAllowDay,@usingday=TotalUsingAllowDay from Personnels where Id = @personnelId
+
+set @usingday = @usingday - @requiestday
+set @remainday = @totalday - @usingday
+
+update Personnels set TotalRemainAllowDay = @remainday, TotalUsingAllowDay = @usingday where Id = @personnelId
+
+end;

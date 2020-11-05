@@ -1,0 +1,83 @@
+﻿@model IEnumerable<PersonnelPermissionFollowing.Entities.PopUps>
+
+@{
+    ViewBag.Title = "Tüm PopUplar";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h4>@ViewBag.Title</h4>
+        <hr />
+    </div>
+</div>
+
+<p>
+    <a href="/PopUp/Create" class="btn btn-primary" title="Yeni PopUp Ekle"><span class="glyphicon glyphicon-plus mr-2"></span> Yeni PopUp Ekle</a>
+</p>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped table-hover table-sm" id="myTable">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PopUpImage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedOnDatetime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedOnDatetime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedUsername)
+                </th>
+                <th>İşlemler</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                <img src="~/Images/PopUpImage/@item.PopUpImage" width="100" height="100" class="img-responsive rounded-circle" alt="" />
+            </td>
+            <td>
+                @if (item.IsActive)
+                {
+                    <i class="fa fa-check text-success"></i>
+                }
+                else
+                {
+                    <i class="fa fa-remove text-danger"></i>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOnDatetime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedOnDatetime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedUsername)
+            </td>
+            <td class="text-left">
+                <a href="/PopUp/Edit/@item.Id" class="btn btn-warning btn-sm" title="Güncelle"><span class="glyphicon glyphicon-edit mr-2"></span></a>
+                <a href="/PopUp/Delete/@item.Id" class="btn btn-danger btn-sm" title="Sil"> <span class="glyphicon glyphicon-trash mr-2"></span></a>
+                <a href="/PopUp/Details/@item.Id" class="btn btn-default btn-sm" title="Detay"> <span class="glyphicon glyphicon-search mr-2"></span></a>
+            </td>
+        </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/customDatatables.js"></script>

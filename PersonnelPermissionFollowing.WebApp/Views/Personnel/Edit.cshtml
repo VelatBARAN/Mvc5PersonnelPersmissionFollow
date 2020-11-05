@@ -1,0 +1,94 @@
+﻿@using PersonnelPermissionFollowing.Entities
+@model Personnels
+
+@{
+    ViewBag.Title = "Personel Güncelleme";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h3>@ViewBag.Title</h3>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-offset-2">
+        @using (Html.BeginForm("Edit", "Personnel", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="~/Images/@Model.ProfileImage" class="img-responsive img-rounded" width="128" height="128" alt="" />
+                    @Html.HiddenFor(model => model.ProfileImage)
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="ProfileImage" id="ProfileImage" aria-describedby="ProfileImageAddon" accept=".png,.jpg,.jpeg">
+                        <label class="custom-file-label" for="ProfileImage">Dosya Seçiniz</label>
+                    </div>
+                    <i class="fa fa-info-circle mr-2"></i>
+                    <small><i>Lütfen .jpg, .png ya da .jpeg formatı kullanın</i></small>
+                </div>
+
+                <div class="col-md-9">
+                    @Html.ValidationSummary(false)
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Tc, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-1" })
+                        @Html.EditorFor(model => model.Tc, new { htmlAttributes = new { @class = "form-control col-md-11 pull-right" } })
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-1" })
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control col-md-11 pull-right" } })
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-1" })
+                        @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control col-md-11 pull-right" } })
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.StartToJobDateTime, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-1" })
+                        @Html.EditorFor(model => model.StartToJobDateTime, new { htmlAttributes = new { @class = "form-control col-md-11 pull-right"} })
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.ExitOfJobDatetime, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-1" })
+                        @Html.EditorFor(model => model.ExitOfJobDatetime, new { htmlAttributes = new { @class = "form-control col-md-11 pull-right" } })
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.PersonnelDegreesId, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-1" })
+                        @Html.DropDownListFor(m => m.PersonnelDegreesId, (SelectList)ViewBag.PersonnelDegreeList, "Lütfen eğitim durumu seçiniz", new { @class = "dropdown form-control pull-right" })
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.PersonnelTasksId, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-1" })
+                        @Html.DropDownListFor(m => m.PersonnelTasksId, (SelectList)ViewBag.PersonnelTaskList, "Lütfen personel görevi seçiniz", new { @class = "dropdown form-control pull-right" })
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.PersonnelPositionsId, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-1" })
+                        @Html.DropDownListFor(m => m.PersonnelPositionsId, (SelectList)ViewBag.PersonnelPositionList, "Lütfen personel unvanı seçiniz", new { @class = "dropdown form-control pull-right" })
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-form-label font-weight-bold col-md-1" })
+                        @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control col-md-11 pull-right", rows = "3", cols = "10" } })
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-warning" title="Güncelle"> <span class="glyphicon glyphicon-edit mr-2"></span> Güncelle</button>
+                            <a href="/Personnel/Index" class="btn btn-default" title="Geri Dön"><span class="glyphicon glyphicon-arrow-left mr-2"></span> Geri Dön</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

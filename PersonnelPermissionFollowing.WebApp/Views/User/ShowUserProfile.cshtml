@@ -1,0 +1,113 @@
+﻿@using PersonnelPermissionFollowing.WebApp.Models
+@model PersonnelPermissionFollowing.Entities.Users
+
+@{
+    ViewBag.Title = "Profil Bİlgilerim";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h4>@ViewBag.Title</h4>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped table-hover table-sm" id="myTable">
+            <thead>
+                <tr>
+                    <th>
+                        <strong>ID</strong>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Personnels.Tc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Personnels.Name) &nbsp;@Html.DisplayNameFor(model => model.Personnels.Surname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Username)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Authority.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifiedUsername)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedOnDatetime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifiedOnDatetime)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.PersonnelsId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Personnels.Tc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Personnels.Name) &nbsp;@Html.DisplayFor(model => model.Personnels.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Authority.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.ModifiedUsername)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.CreatedOnDatetime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.ModifiedOnDatetime)
+                    </td>
+                    <td>
+                        <div class="col-md-2 text-right">
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
+                                    <span class="glyphicon glyphicon-cog">&nbsp;</span>
+                                    Seçenekler
+                                    <span class="icon-cog icon-white"></span><span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="/User/EditUserProfile" title="Güncelle"><span class="glyphicon glyphicon-edit mr-2"> Güncelle</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/User/DetailsUserProfile"> <span class="glyphicon glyphicon-search mr-2"> Detay</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/customDatatables.js"></script>

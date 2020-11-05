@@ -1,0 +1,190 @@
+﻿@model IEnumerable<PersonnelPermissionFollowing.Entities.Personnels>
+
+@{
+    ViewBag.Title = "Tüm Personeller";
+}
+
+<!-- ALT-SHİFT-W tuşlarına basarak seçtiğin satırı div in içine alır-->
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h4>@ViewBag.Title</h4>
+        <hr />
+    </div>
+</div>
+
+<p>
+    <a href="/Personnel/Create" class="btn btn-primary" title="Yeni Personel Ekle"><span class="glyphicon glyphicon-plus mr-2"></span> Yeni Personel Ekle</a>
+    <a href="/Personnel/ExitGivenPersonnelList" class="btn btn-danger" title="Çıkış Verilen Personeller"><span class="fa fa-thumbs-down"></span> Çıkış Verilen Personeller</a>
+    <a href="/Personnel/ActivePersonnelList" class="btn btn-info" title="Aktif Çalışan Personeller"> <span class="fa fa-thumbs-up"></span>Aktif Çalışan Personeller</a>
+    <a href="/Personnel/Index" class="btn btn-default" title="Yenile"> <span class="fa fa-refresh"></span>Yenile</a>
+    @if (ViewBag.ActivePersonnelCount != null)
+    {
+        <label class="alert-info pull-right">Aktif Olarak Çalışan Personel Sayısı : <strong>@ViewBag.ActivePersonnelCount </strong></label>
+    }
+    else if (ViewBag.ExitGivenPersonnelCount != null)
+    {
+        <label class="alert-danger pull-right">Çıkış Verilen Personel Sayısı : <strong>@ViewBag.ExitGivenPersonnelCount </strong></label>
+    }
+    else if (ViewBag.TotalPersonnelCount != null)
+    {
+        <label class="alert-success pull-right">Toplam Personel Sayısı : <strong>@ViewBag.TotalPersonnelCount </strong></label>
+    }
+    @*@using (Ajax.BeginForm("PersonnelListRefresh", "Personnel", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "personnelTable" }))
+        {
+            <button class="glyphicon glyphicon-refresh btn btn-outline-info btn-md" title="Yenile"> Yenile</button>
+        }*@
+
+</p>
+
+@*<div id="personnelListRefresh">
+
+    </div>*@
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-bordered table-striped table-hover table-sm" id="personnelTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Surname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartToJobDateTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ExitOfJobDatetime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalWorkingYear)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalAllowDay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsStateWorking)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PersonnelDegrees.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PersonnelTasks.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PersonnelPositions.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedOnDatetime)
+                    </th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Surname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartToJobDateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExitOfJobDatetime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalWorkingYear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalAllowDay)
+                        </td>
+                        <td class="text-center">
+                            @if (item.IsStateWorking)
+                            {
+                                <i class="fa fa-check text-success"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-times text-danger"></i>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonnelDegrees.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonnelTasks.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonnelPositions.Name)
+                        </td>
+                        <td>
+                            @Html.Raw(item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOnDatetime)
+                        </td>
+                        <td>
+                            <div class="col-md-2 text-right">
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
+                                        <span class="glyphicon glyphicon-cog">&nbsp;</span>
+                                        Seçenekler
+                                        <span class="icon-cog icon-white"></span><span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="/Personnel/Edit/@item.Id" title="Güncelle"><span class="glyphicon glyphicon-edit mr-2"> Güncelle</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="personnelDelete" title="Sil" data-id="@item.Id"><span class="glyphicon glyphicon-trash mr-2"> Sil</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="/Personnel/Details/@item.Id" title="Detay"> <span class="glyphicon glyphicon-search mr-2"> Detay</span></a>
+                                        </li>
+                                        <li>
+                                            @if (item.ExitOfJobDatetime != null)
+                                            {
+                                                <a href="" id="btnPermission" title="İzin ver" data-id="@item.Id" data-exitdate="@item.ExitOfJobDatetime">
+                                                    <span class="glyphicon glyphicon-pencil mr-2"> İzin ver</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="/Personnel/PersonnelPermissionCreate/@item.Id" title="İzin ver">
+                                                    <span class="glyphicon glyphicon-pencil mr-2"> İzin ver</span>
+                                                </a>
+                                            }
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<!-- Datatables -->
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/customPersonnelDatatables.js"></script>
+<script src="~/Scripts/customPersonnelPermission.js"></script>
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@  <!-- AjaxOptions ile kullanılır. Nuget ten AjaxMinJquery paketi indirilir-->

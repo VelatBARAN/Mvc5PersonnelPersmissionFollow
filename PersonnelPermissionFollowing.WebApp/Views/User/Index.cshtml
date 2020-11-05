@@ -1,0 +1,116 @@
+﻿@model IEnumerable<PersonnelPermissionFollowing.Entities.Users>
+
+@{
+    ViewBag.Title = "Kullanıcılar";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h4>@ViewBag.Title</h4>
+        <hr />
+    </div>
+</div>
+
+<p>
+    <a href="/User/Create" class="btn btn-primary" title="Yeni Kullanıcı Ekle"><span class="glyphicon glyphicon-plus mr-2"></span> Yeni Kullanıcı Ekle</a>
+</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped table-hover table-sm" id="userTable">
+            <thead>
+                <tr>
+                    <th>
+                        <strong>ID</strong>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Authority.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Personnels.Tc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Username)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifiedUsername)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedOnDatetime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifiedOnDatetime)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonnelsId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Authority.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Personnels.Tc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Username)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifiedUsername)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOnDatetime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifiedOnDatetime)
+                        </td>
+                        <td>
+                            <div class="col-md-2 text-right">
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
+                                        <span class="glyphicon glyphicon-cog">&nbsp;</span>
+                                        Seçenekler
+                                        <span class="icon-cog icon-white"></span><span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="/User/Edit/@item.Id" title="Güncelle"><span class="glyphicon glyphicon-edit mr-2"> Güncelle</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="userDelete" title="Sil" data-id="@item.Id"><span class="glyphicon glyphicon-trash mr-2"> Sil</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="/User/Details/@item.Id" title="Detay"> <span class="glyphicon glyphicon-search mr-2"> Detay</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/customUserDatatables.js"></script>

@@ -1,0 +1,123 @@
+﻿@using PersonnelPermissionFollowing.Entities
+@model IEnumerable<AssigningTaskOfPersonnel>
+
+@{
+    ViewBag.Title = "Görev Atanan Personeller";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h4>@ViewBag.Title</h4>
+        <hr />
+    </div>
+</div>
+
+<p>
+    <a href="/AssigningTaskOfPersonnel/Create" class="btn btn-primary" title="Yeni Görev Atama"><span class="glyphicon glyphicon-plus mr-2"></span> Yeni Görev Atama</a>
+</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped table-hover table-sm" id="assignedTaskPersonnelTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ZonesId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Zones.PersonnelsId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PersonnelsId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Personnels.Tc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Weekdays.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TaskDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifiedUsername)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedOnDatetime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifiedOnDatetime)
+                    </th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Zones.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Zones.Personnels.Name)&nbsp;@Html.DisplayFor(modelItem => item.Zones.Personnels.Surname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Personnels.Name)&nbsp;@Html.DisplayFor(modelItem => item.Personnels.Surname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Personnels.Tc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Weekdays.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TaskDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifiedUsername)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOnDatetime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifiedOnDatetime)
+                        </td>
+                        <td>
+                            <div class="col-md-2 text-right">
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
+                                        <span class="glyphicon glyphicon-cog">&nbsp;</span>
+                                        Seçenekler
+                                        <span class="icon-cog icon-white"></span><span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="/AssigningTaskOfPersonnel/Edit/@item.Id" title="Güncelle"><span class="glyphicon glyphicon-edit mr-2"> Güncelle</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="assignedTaskPersonnelDelete" title="Sil" data-id="@item.Id"><span class="glyphicon glyphicon-trash mr-2"> Sil</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="/AssigningTaskOfPersonnel/Details/@item.Id" title="Detay"> <span class="glyphicon glyphicon-search mr-2"> Detay</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/customAssignedPersonnelDatatables.js"></script>

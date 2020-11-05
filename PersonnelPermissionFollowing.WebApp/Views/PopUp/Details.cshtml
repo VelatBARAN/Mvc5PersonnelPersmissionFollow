@@ -1,0 +1,60 @@
+﻿@model PersonnelPermissionFollowing.Entities.PopUps
+
+@{
+    ViewBag.Title = "PopUp Detay";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h3>@ViewBag.Title</h3>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <dl class="dl-horizontal">
+
+            <div class="col-md-5">
+                <dt>
+                    @Html.DisplayNameFor(model => model.PopUpImage)
+                </dt>
+
+                <dd>
+                    <img src="~/Images/PopUpImage/@Model.PopUpImage" alt="" width="250" height="250" class="img-responsive img-rounded img-circle" />
+                </dd>
+            </div>
+
+            <div class="col-md-7">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </dt>
+
+                <dd>
+                    @if (Model.IsActive)
+                    {
+                        <i class="fa fa-check text-success"></i>
+                    }
+                    else
+                    {
+                        <i class="fa fa-remove text-danger"></i>
+                    }
+                </dd>
+            </div>
+
+        </dl>
+    </div>
+</div>
+<div class="col-md-12 text-right">
+    <a href="/PopUp/Edit/@Model.Id" class="btn btn-warning" title="Güncelle"><span class="glyphicon glyphicon-edit mr-2"></span> Güncelle</a>
+    <a href="/PopUp/Index" class="btn btn-default" title="Geri Dön"><span class="glyphicon glyphicon-arrow-left mr-2"></span> Geri Dön</a>
+</div>

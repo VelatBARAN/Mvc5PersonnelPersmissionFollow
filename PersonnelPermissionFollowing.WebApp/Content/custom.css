@@ -1,0 +1,21 @@
+﻿.row {
+    margin-right: -100px;
+    margin-left: -15px;
+}
+
+.logo-area {
+    padding-top: 20px;
+}
+
+    .logo-area a {
+        color: white;
+        font-size: 15px;
+    }
+
+    .logo-area a:hover{
+        color:antiquewhite;
+    }
+
+    textarea{
+        width:700px;
+    }

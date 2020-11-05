@@ -1,0 +1,47 @@
+create trigger trgInsertAssignedPersonnel
+on AssigningTaskOfPersonnel
+after Insert
+as
+begin
+
+declare @personnelsId int
+
+select @personnelsId=PersonnelsId from inserted;
+update Personnels set IsAssignedTask=1 where Id=@personnelsId;
+
+end;
+
+-------------------------------------------------------
+
+create trigger trgDeleteAssignedPersonnel
+on AssigningTaskOfPersonnel
+after delete
+as
+begin
+
+declare @personnelsId int
+
+select @personnelsId=PersonnelsId from deleted;
+update Personnels set IsAssignedTask=0 where Id=@personnelsId;
+
+end;
+
+---------------------------------------------------------
+
+create trigger trgUpdateAssignedPersonnel
+on AssigningTaskOfPersonnel
+after update
+as
+begin
+
+declare @oldPersonnelsId int
+declare @newPersonnelsId int
+
+select @oldPersonnelsId=PersonnelsId from deleted;
+update Personnels set IsAssignedTask=0 where Id=@oldPersonnelsId;
+
+select @newPersonnelsId=PersonnelsId from inserted;
+update Personnels set IsAssignedTask=1 where Id=@newPersonnelsId;
+
+end;
+

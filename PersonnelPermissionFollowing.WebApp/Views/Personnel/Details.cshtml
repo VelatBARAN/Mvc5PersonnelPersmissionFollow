@@ -1,0 +1,154 @@
+﻿@using PersonnelPermissionFollowing.Entities
+@model Personnels
+
+@{
+    ViewBag.Title = "Personel Detayı";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h3>@ViewBag.Title</h3>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <dl class="dl-horizontal">
+            @*<dt>
+                @Html.DisplayNameFor(model => model.ProfilImage)
+            </dt>*@
+
+            <div class="col-md-4">
+                <dd>
+                    <img src="~/Images/@Model.ProfileImage" alt="" width="250" height="250" class="img-responsive img-rounded" />
+                </dd>                    
+            </div>
+
+            <div class="col-md-8" style="font-size:18px">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tc)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Tc)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Surname)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Surname)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.StartToJobDateTime)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StartToJobDateTime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ExitOfJobDatetime)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ExitOfJobDatetime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TotalWorkingYear)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TotalWorkingYear)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TotalAllowDay)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TotalAllowDay)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsStateWorking)
+                </dt>
+                <dd>
+                    @if (Model.IsStateWorking)
+                    {
+                        <i class="fa fa-check text-success"></i>
+                    }
+                    else
+                    {
+                        <i class="fa fa-times text-danger"></i>
+                    }
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PersonnelDegrees.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PersonnelDegrees.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PersonnelTasks.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PersonnelTasks.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PersonnelPositions.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PersonnelPositions.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PersonnelTasks.Name)
+                </dt>
+                <dd>
+                    @Html.Raw(Model.Description)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ModifiedUsername)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ModifiedUsername)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreatedOnDatetime)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CreatedOnDatetime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ModifiedOnDatetime)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ModifiedOnDatetime)
+                </dd>
+            </div>
+
+        </dl>
+    </div>
+</div>
+
+<div class="col-md-12 text-right">
+    <a href="/Personnel/Edit/@Model.Id" class="btn btn-warning" title="Güncelle"><span class="glyphicon glyphicon-edit mr-2"></span> Güncelle</a>
+    <a href="/Personnel/Index" class="btn btn-default" title="Geri Dön"><span class="glyphicon glyphicon-arrow-left mr-2"></span> Geri Dön</a>
+</div>
+

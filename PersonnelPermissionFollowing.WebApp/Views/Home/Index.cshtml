@@ -1,0 +1,392 @@
+﻿@using PersonnelPermissionFollowing.BusinessLayer
+@using System.Data.Entity;
+
+@{
+    ViewBag.Title = "Anasayfa";
+    PersonnelManager personnelManager = new PersonnelManager();
+    PersonnelPermissionRequestManager personnelPermissionRequestManager = new PersonnelPermissionRequestManager();
+
+    var personnelList = personnelManager.ListQueryable()
+                                         .Include("PersonnelDegrees").Include("PersonnelPositions").Include("PersonnelTasks")
+                                         .Where(m => m.ExitOfJobDatetime == null).OrderByDescending(x => x.CreatedOnDatetime).Take(5);
+
+    var personnelPermissionList = personnelPermissionRequestManager.ListQueryable()
+                                                             .Include("Personnels")
+                                                             .Include("PersonnelPermissionTips")
+                                                             .Include("PermissionStates")
+                                                             .Include("Users")
+                                                             .Where(x => x.PermissionEndDatetime >= DateTime.Today && x.PersonnelPermissionTipsId == 2 && x.PermissionStatesId == 2)
+                                                             .OrderByDescending(x => x.CreatedOnDatetime).Take(5);
+
+    var personnelPermissionIsApproveList = personnelPermissionRequestManager.ListQueryable()
+                                                         .Include("Personnels")
+                                                         .Include("PersonnelPermissionTips")
+                                                         .Include("PermissionStates")
+                                                         .Include("Users")
+                                                         .Where(x => x.PermissionEndDatetime >= DateTime.Today && x.PermissionStatesId == 1)
+                                                         .OrderByDescending(x => x.CreatedOnDatetime).Take(5);
+
+    var personnelReportList = personnelPermissionRequestManager.ListQueryable()
+                                                 .Include("Personnels")
+                                                 .Include("PersonnelPermissionTips")
+                                                 .Include("PermissionStates")
+                                                 .Include("Users")
+                                                 .Where(x => x.PermissionEndDatetime >= DateTime.Today && (x.PersonnelPermissionTipsId == 1 ||
+                                                                 x.PersonnelPermissionTipsId == 3 || x.PersonnelPermissionTipsId == 4) && x.PermissionStatesId == 2)
+                                                 .OrderByDescending(x => x.CreatedOnDatetime).Take(5);
+
+    var personnelPermissionOrReportListLastDay = personnelPermissionRequestManager.ListQueryable()
+                                                     .Include("Personnels")
+                                                     .Include("PersonnelPermissionTips")
+                                                     .Include("PermissionStates")
+                                                     .Include("Users")
+                                                     .Where(x => x.PermissionEndDatetime == DateTime.Today && x.PermissionStatesId == 2)
+                                                     .OrderByDescending(x => x.CreatedOnDatetime).Take(5);
+
+    var d = DateTime.Today.AddDays(-1);
+    var personnelPermissionOrReportFinishedList = personnelPermissionRequestManager.ListQueryable()
+                                                     .Include("Personnels")
+                                                     .Include("PersonnelPermissionTips")
+                                                     .Include("PermissionStates")
+                                                     .Include("Users")
+                                                     .Where(x => x.PermissionEndDatetime == d && x.PermissionStatesId == 2)
+                                                     .OrderByDescending(x => x.CreatedOnDatetime).Take(5);
+
+}
+
+<!-- Start Status area -->
+<div class="notika-status-area">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h4 class="text-center">
+                        <i class="fa fa-users"></i> <br /><br />
+                        Toplam Personel Sayısı
+                    </h4>
+                    <h2 class="text-center"><span class="counter">@ViewBag.TotalPersonnel</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h4 class="text-center">
+                        <i class="fa fa-hourglass-half"></i> <br /><br />
+                        İzni Devam Eden Personel Sayısı
+                    </h4>
+                    <h2 class="text-center"><span class="counter">@ViewBag.TotalPersonnelPermission</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h4 class="text-center">
+                        <i class="fa fa-heartbeat"></i> <br /><br />
+                        Raporu (Doğum / Ölüm / Hastalık) Devam Eden Personel Sayısı
+                    </h4>
+                    <h2 class="text-center"><span class="counter">@ViewBag.TotalPersonneLReport</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                <div class="website-traffic-ctn">
+                    <h4 class="text-center">
+                        <i class="fa fa-map-o"></i> <br /><br />
+                        Toplam Mıntıka Sayısı
+                    </h4>
+                    <h2 class="text-center"><span class="counter">@ViewBag.TotalZone</span></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Status area-->
+
+<div class="row" style="margin-top:30px">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds alert-dark">
+                <div class="recent-post-ctn">
+                    <div class="recent-post-title">
+                        <h5 class="alert alert-danger"><span class="glyphicon glyphicon-import"></span>  Son Eklenen Personeller</h5>
+                    </div>
+                </div>
+                <div class="recent-post-items">
+                    <div class="recent-post-signle rct-pt-mg-wp">
+                        @foreach (var item in personnelList)
+                        {
+                            <a href="/Personnel/Details/@item.Id">
+                                <div class="recent-post-flex">
+                                    <div class="row" style="width:300px;height:50px">
+                                        <div class="col-md-3">
+                                            <div class="recent-post-img">
+                                                <img src="~/Images/@item.ProfileImage" alt="" width="50" height="50" />
+                                            </div>
+                                        </div>
+                                        <div class="recent-post-it-ctn">
+                                            <div class="col-md-8">
+                                                <h2>@item.Name&nbsp;@item.Surname</h2>
+                                                <p>@item.PersonnelTasks.Name</p>
+                                            </div>
+                                            <div class="col-md-1 pull-right">
+                                                <span class="glyphicon glyphicon-search pull-right" style="margin-top:5px" title="Detay"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <br />
+                        }
+                        <div class="recent-post-signle">
+                            <a href="/Personnel/Index">
+                                <div class="recent-post-flex rc-ps-vw">
+                                    <div class="recent-post-line rct-pt-mg">
+                                        <p>Tümünü Gör</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                <div class="recent-post-ctn">
+                    <div class="recent-post-title">
+                        <h5 class="alert alert-danger"><span class="glyphicon glyphicon-export"></span> Son İzin Verilen Personeller</h5>
+                    </div>
+                </div>
+                <div class="recent-post-items">
+                    <div class="recent-post-signle rct-pt-mg-wp">
+                        @foreach (var item in personnelPermissionList)
+                        {
+                            <a href="/Personnel/PersonnelPermissionDetails/@item.Id">
+                                <div class="recent-post-flex">
+                                    <div class="row" style="width:300px;height:50px">
+                                        <div class="col-md-3">
+                                            <div class="recent-post-img">
+                                                <img src="~/Images/@item.Personnels.ProfileImage" alt="" width="50" height="50" />
+                                            </div>
+                                        </div>
+                                        <div class="recent-post-it-ctn">
+                                            <div class="col-md-8">
+                                                <h2>@item.Personnels.Name&nbsp;@item.Personnels.Surname</h2>
+                                                <p>@item.Personnels.PersonnelTasks.Name</p>
+                                            </div>
+                                            <div class="col-md-1 pull-right">
+                                                <span class="glyphicon glyphicon-search pull-right" style="margin-top:5px" title="Detay"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a> <br />
+                        }
+                    </div>
+
+                    <div class="recent-post-signle">
+                        <a href="/Personnel/PersonnelPermissionList">
+                            <div class="recent-post-flex rc-ps-vw">
+                                <div class="recent-post-line rct-pt-mg">
+                                    <p>Tümünü Gör</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                <div class="recent-post-ctn">
+                    <div class="recent-post-title">
+                        <h5 class="alert alert-danger"><span class="glyphicon glyphicon-eye-open"></span> Son Rapor(Ölüm/Doğum/Hastalık) Getiren Personeller</h5>
+                    </div>
+                </div>
+                <div class="recent-post-items">
+                    <div class="recent-post-signle rct-pt-mg-wp">
+                        @foreach (var item in personnelReportList)
+                        {
+                            <a href="/Personnel/PersonnelPermissionDetails/@item.Id">
+                                <div class="recent-post-flex">
+                                    <div class="row" style="width:300px;height:50px">
+                                        <div class="col-md-3">
+                                            <div class="recent-post-img">
+                                                <img src="~/Images/@item.Personnels.ProfileImage" alt="" width="50" height="50" />
+                                            </div>
+                                        </div>
+                                        <div class="recent-post-it-ctn">
+                                            <div class="col-md-8">
+                                                <h2>@item.Personnels.Name&nbsp;@item.Personnels.Surname</h2>
+                                                <p>@item.Personnels.PersonnelTasks.Name</p>
+                                            </div>
+                                            <div class="col-md-1 pull-right">
+                                                <span class="glyphicon glyphicon-search pull-right" style="margin-top:5px" title="Detay"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a> <br />
+                        }
+                    </div>
+
+                    <div class="recent-post-signle">
+                        <a href="/Personnel/PersonnelPermissionList">
+                            <div class="recent-post-flex rc-ps-vw">
+                                <div class="recent-post-line rct-pt-mg">
+                                    <p>Tümünü Gör</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top:30px">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                <div class="recent-post-ctn">
+                    <div class="recent-post-title">
+                        <h5 class="alert alert-danger"><span class="glyphicon glyphicon-alert"></span> İzin veya Rapor Tarih Son Gün Olan Personeller</h5>
+                    </div>
+                </div>
+                <div class="recent-post-items">
+                    <div class="recent-post-signle rct-pt-mg-wp">
+                        @foreach (var item in personnelPermissionOrReportListLastDay)
+                        {
+                            <a href="/Personnel/PersonnelPermissionDetails/@item.Id">
+                                <div class="recent-post-flex">
+                                    <div class="row" style="width:300px;height:50px">
+                                        <div class="col-md-3">
+                                            <div class="recent-post-img">
+                                                <img src="~/Images/@item.Personnels.ProfileImage" alt="" width="50" height="50" />
+                                            </div>
+                                        </div>
+                                        <div class="recent-post-it-ctn">
+                                            <div class="col-md-8">
+                                                <h2>@item.Personnels.Name&nbsp;@item.Personnels.Surname</h2>
+                                                <p>@item.Personnels.PersonnelTasks.Name</p>
+                                            </div>
+                                            <div class="col-md-1 pull-right">
+                                                <span class="glyphicon glyphicon-search pull-right" style="margin-top:5px" title="Detay"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a> <br />
+                        }
+                    </div>
+
+                    <div class="recent-post-signle">
+                        <a href="/Personnel/PersonnelPermissionOrReportLastDayList">
+                            <div class="recent-post-flex rc-ps-vw">
+                                <div class="recent-post-line rct-pt-mg">
+                                    <p>Tümünü Gör</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                <div class="recent-post-ctn">
+                    <div class="recent-post-title">
+                        <h5 class="alert alert-danger"><span class="glyphicon glyphicon-cog"></span> Onayda Bekleyen İzinler</h5>
+                    </div>
+                </div>
+                <div class="recent-post-items">
+                    <div class="recent-post-signle rct-pt-mg-wp">
+                        @foreach (var item in personnelPermissionIsApproveList)
+                        {
+                            <a href="/Personnel/PersonnelPermissionDetails/@item.Id">
+                                <div class="recent-post-flex">
+                                    <div class="row" style="width:300px;height:50px">
+                                        <div class="col-md-3">
+                                            <div class="recent-post-img">
+                                                <img src="~/Images/@item.Personnels.ProfileImage" alt="" width="50" height="50" />
+                                            </div>
+                                        </div>
+                                        <div class="recent-post-it-ctn">
+                                            <div class="col-md-8">
+                                                <h2>@item.Personnels.Name&nbsp;@item.Personnels.Surname</h2>
+                                                <p>@item.Personnels.PersonnelTasks.Name</p>
+                                            </div>
+                                            <div class="col-md-1 pull-right">
+                                                <span class="glyphicon glyphicon-search pull-right" style="margin-top:5px" title="Detay"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a> <br />
+                        }
+                    </div>
+
+                    <div class="recent-post-signle">
+                        <a href="/Personnel/PersonnelIsApprovePermissionList">
+                            <div class="recent-post-flex rc-ps-vw">
+                                <div class="recent-post-line rct-pt-mg">
+                                    <p>Tümünü Gör</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                <div class="recent-post-ctn">
+                    <div class="recent-post-title">
+                        <h5 class="alert alert-danger"><i class="fa fa-hourglass-end"></i> İzni veya Raporu Bitip Bugün İşbaşı Yapan Personeller</h5>
+                    </div>
+                </div>
+                <div class="recent-post-items">
+                    <div class="recent-post-signle rct-pt-mg-wp">
+                        @foreach (var item in personnelPermissionOrReportFinishedList)
+                        {
+                            <a href="/Personnel/PersonnelPermissionDetails/@item.Id">
+                                <div class="recent-post-flex">
+                                    <div class="row" style="width:300px;height:50px">
+                                        <div class="col-md-3">
+                                            <div class="recent-post-img">
+                                                <img src="~/Images/@item.Personnels.ProfileImage" alt="" width="50" height="50" />
+                                            </div>
+                                        </div>
+                                        <div class="recent-post-it-ctn">
+                                            <div class="col-md-8">
+                                                <h2>@item.Personnels.Name&nbsp;@item.Personnels.Surname</h2>
+                                                <p>@item.Personnels.PersonnelTasks.Name</p>
+                                            </div>
+                                            <div class="col-md-1 pull-right">
+                                                <span class="glyphicon glyphicon-search pull-right" style="margin-top:5px" title="Detay"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a> <br />
+                        }
+                    </div>
+
+                    <div class="recent-post-signle">
+                        <a href="/Personnel/PersonnelPermissionOrReportedFinishedList">
+                            <div class="recent-post-flex rc-ps-vw">
+                                <div class="recent-post-line rct-pt-mg">
+                                    <p>Tümünü Gör</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

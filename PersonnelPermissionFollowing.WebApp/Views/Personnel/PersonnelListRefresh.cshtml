@@ -1,0 +1,156 @@
+﻿@model IEnumerable<PersonnelPermissionFollowing.Entities.Personnels>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-bordered table-striped table-hover table-sm" id="personnelTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Surname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProfileImage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartToJobDateTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ExitOfJobDatetime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalWorkingYear)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalAllowDay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalUsingAllowDay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalRemainAllowDay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsStateWorking)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PersonnelDegrees.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PersonnelTasks.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PersonnelPositions.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedOnDatetime)
+                    </th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Surname)
+                        </td>
+                        <td>
+                            <img src="~/Images/@item.ProfileImage" alt="" width="100" height="100" class="img-responsive img-rounded" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartToJobDateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExitOfJobDatetime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalWorkingYear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalAllowDay)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalUsingAllowDay)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalRemainAllowDay)
+                        </td>
+                        <td class="text-center">
+                            @if (item.IsStateWorking)
+                            {
+                                <i class="fa fa-check text-success"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-times text-danger"></i>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonnelDegrees.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonnelTasks.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonnelPositions.Name)
+                        </td>
+                        <td>
+                            @Html.Raw(item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOnDatetime)
+                        </td>
+                        <td>
+                            <div class="col-md-2 text-right">
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
+                                        <span class="glyphicon glyphicon-cog">&nbsp;</span>
+                                        Seçenekler
+                                        <span class="icon-cog icon-white"></span><span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="/Personnel/Edit/@item.Id" title="Güncelle"><span class="glyphicon glyphicon-edit mr-2"> Güncelle</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="personnelDelete" title="Sil" data-id="@item.Id"><span class="glyphicon glyphicon-trash mr-2"> Sil</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="/Personnel/Details/@item.Id" title="Detay"> <span class="glyphicon glyphicon-search mr-2"> Detay</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="/Personnel/PersonnelPermissionCreate/@item.Id" title="İzin ver">
+                                                <span class="glyphicon glyphicon-pencil mr-2"> İzin ver</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/customPersonnelDatatables.js"></script>

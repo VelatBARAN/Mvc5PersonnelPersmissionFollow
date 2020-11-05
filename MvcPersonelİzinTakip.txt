@@ -1,0 +1,78 @@
+1- Zone Lists
+- Id
+- Name
+- Chief (Personnel table)
+- CreatedOnDatetime
+- ModifiedOnDatetime
+- ModifiedUsername
+
+2- Task Lists
+- Id
+- Name
+- CreatedOnDatetime
+- ModifiedOnDatetime
+- ModifiedUsername
+
+4- Degree Lists
+- Id
+- Name
+- CreatedOnDatetime
+- ModifiedOnDatetime
+- ModifiedUsername
+
+5- Personnel Lists
+- Id
+- TC
+- Name
+- Surname
+- Phone
+- ProfileImage
+- StartToJobDateTime
+- ExitOfJobDatetime
+- TotalWorkingYear
+- TotalAllowDay
+- IsActive
+- IsAdmin
+- IsChief
+- DegreeId (Degree table)
+- TaskId (Task table)
+- PositionId (Positions table)
+- Description
+- CreatedOnDatetime
+- ModifiedOnDatetime
+- ModifiedUsername
+
+6- AssigningTaskOfPersonnel Lists
+- Id
+- PersonnelId (Personnel table)
+- ZoneId (Zone table)
+- TaskDescription
+- WeekVacation
+- CreatedOnDatetime
+- ModifiedOnDatetime
+- ModifiedUsername
+
+7- PersonnelPermissionRequest Lists
+- Id
+- PersonnelId
+- PermissionTipsId
+- NumberofDays
+- PermissionStartDatetime
+- PermissionEndDatetime
+- CreatedOnDatetime
+- ModifiedOnDatetime
+- ModifiedUsername
+
+8- PermissionTips Lists
+- Id
+- Name
+- CreatedOnDatetime
+- ModifiedOnDatetime
+- ModifiedUsername
+
+9- PersonnelPositions Lists
+- Id
+- Name
+- CreatedOnDatetime
+- ModifiedOnDatetime
+- ModifiedUsername

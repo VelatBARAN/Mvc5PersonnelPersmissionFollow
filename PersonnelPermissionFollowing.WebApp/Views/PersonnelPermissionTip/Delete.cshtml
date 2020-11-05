@@ -1,0 +1,64 @@
+﻿@model PersonnelPermissionFollowing.Entities.PersonnelPermissionTips
+
+@{
+    ViewBag.Title = "İzin Tipi Silme";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="display-4 border-bottom"></p>
+        <h3>@ViewBag.Title</h3>
+        <p class="text-danger" style="font-size:16px">
+            İzin Tip kaydını silmek istediğinize emin misiniz ?
+        </p>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-offset-2">
+        <dl class="dl-horizontal" style="font-size:18px">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedUsername)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedUsername)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOnDatetime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOnDatetime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedOnDatetime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedOnDatetime)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12 text-right">
+        <button type="submit" class="btn btn-danger" title="Sil"> <span class="glyphicon glyphicon-trash mr-2"></span> Sil</button>
+        <a href="/PersonnelPermissionTip/Index" class="btn btn-default" title="Geri Dön"><span class="glyphicon glyphicon-arrow-left mr-2"></span> Geri Dön</a>
+    </div>
+}
